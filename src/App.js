@@ -6,6 +6,7 @@ import styles from './App.module.scss';
 import { PostList } from './components/PostList';
 import { Pagination } from './components/Pagination';
 import queryString from 'query-string';
+import { PostFiltersForm } from './components/PostFiltersForm';
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
   const [filters, setFilters] = useState({
     _limit: 10,
     _page: 1,
+    title_like: 'quis'
   })
 
   // TodoList
@@ -75,6 +77,7 @@ function App() {
     console.log('TODO list effect')
   })
 
+  // Pagination
   function handlePageChange(newPage) {
     console.log('New page: ', newPage)
     setFilters({
@@ -83,11 +86,22 @@ function App() {
     })
   }
 
+  // Search
+  function handleFiltersChange(newFilters) {
+    console.log('New filters: ', newFilters)
+    setFilters({
+      ...filters,
+      _page: 1,
+      title_like: newFilters.searchTerm
+    })
+  }
+
 
 
   return (
     <div className={styles.paddingPage}>
       <h1>Welcome to React Hooks</h1>
+      <PostFiltersForm onSubmit={handleFiltersChange}/>
       <PostList posts={postList}/>
       <Pagination 
         pagination={pagination} 
