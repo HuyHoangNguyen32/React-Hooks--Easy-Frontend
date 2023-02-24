@@ -54,7 +54,7 @@ function App() {
     async function fetchPostList() {
       try {
         const paramsString = queryString.stringify(filters)
-        const requestUrl = `http://js-post-api.herokuapp.com/api/posts?${paramsString}`
+        const requestUrl = `https://js-post-api.herokuapp.com/api/posts?${paramsString}`
         const response = await fetch(requestUrl)
         const responseJSON = await response.json()
         console.log(responseJSON)
